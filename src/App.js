@@ -1,15 +1,26 @@
 import React from 'react';
-import './App.css';
 import { authContext } from './adalConfig';
+import './App.css';
 
 function App() {
   return (
     <div>
       <header>
-      <button onClick={() => authContext.login()}>Log In</button>
-        <button onClick={() => authContext.logOut()}>Logout</button>
+        {!authContext.getCachedUser() &&
+          <button onClick={() => authContext.login()}>Log In</button>
+        }
+        {
+          authContext.getCachedUser() &&
+          <button onClick={() => authContext.logOut()}>Logout</button>
+        }
       </header>
-      <p>logged in.  access token is {localStorage.getItem('token')}</p>
+      {
+        authContext.getCachedUser() &&
+        <div>
+          <p>logged in.  access token is {localStorage.getItem('token')}</p>
+          <p>user is {authContext.getCachedUser().userName}</p>
+        </div>
+      }
     </div>
   );
 }
