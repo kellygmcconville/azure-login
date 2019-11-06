@@ -1,24 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { authContext } from './adalConfig';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header>
+      <button onClick={() => authContext.login()}>Log In</button>
+        <button onClick={() => authContext.logOut()}>Logout</button>
       </header>
+      <p>logged in.  access token is {localStorage.getItem('token')}</p>
     </div>
   );
 }
